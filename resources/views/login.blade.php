@@ -110,7 +110,17 @@
 <body>
     <div class="login-container">
         <div class="login-card">
-            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💎</div>
+            <div style="display: flex; justify-content: center; margin-bottom: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#primary-gradient-logo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                        <linearGradient id="primary-gradient-logo" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#10b981" />
+                            <stop offset="100%" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M6 3h12l4 6-10 12L2 9z"/>
+                </svg>
+            </div>
             <h1 style="margin-bottom: 0.25rem; font-size: 1.75rem;">KKB Premium</h1>
             <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">ログインして家計を管理しましょう</p>
 

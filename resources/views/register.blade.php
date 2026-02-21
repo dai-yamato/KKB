@@ -119,7 +119,17 @@
 <body>
     <div class="register-container">
         <div class="register-card">
-            <div style="font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;">💎</div>
+            <div style="display: flex; justify-content: center; margin-bottom: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#primary-gradient-logo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                        <linearGradient id="primary-gradient-logo" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#10b981" />
+                            <stop offset="100%" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M6 3h12l4 6-10 12L2 9z"/>
+                </svg>
+            </div>
             <h1 id="page-title" style="margin-bottom: 0.5rem; text-align: center;">新規アカウント登録</h1>
             <p id="page-subtitle" style="color: var(--text-muted); margin-bottom: 2rem; text-align: center;">
                 家計簿を共有する新しい家庭を作成します</p>

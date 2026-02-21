@@ -101,6 +101,18 @@
             text-align: left;
             display: none;
         }
+
+        @media (max-width: 768px) {
+            .register-container {
+                padding: 1rem;
+            }
+            .register-card {
+                padding: 1.5rem;
+            }
+            h1#page-title {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 

@@ -76,6 +76,16 @@
             font-size: 0.9rem;
             display: none;
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                box-sizing: border-box;
+            }
+            .login-card {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>

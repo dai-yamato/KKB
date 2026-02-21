@@ -95,6 +95,15 @@
             display: none;
             text-align: left;
         }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1rem;
+            }
+            .login-card {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 

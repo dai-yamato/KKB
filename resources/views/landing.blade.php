@@ -240,7 +240,11 @@
             h1 { font-size: 2.2rem; letter-spacing: -1px; }
             .hero { padding: 8rem 5% 4rem; }
             .badge { margin-bottom: 1.5rem; }
-            .nav-links { display: none; }
+            .logo { font-size: 1.2rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links > a:first-child { display: none; }
+            .btn-cta { padding: 0.6rem 1rem; font-size: 0.85rem; }
+            .nav-links a:not(.btn-cta) { font-size: 0.85rem; }
         }
     </style>
 </head>

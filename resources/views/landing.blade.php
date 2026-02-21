@@ -237,7 +237,9 @@
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.2rem; letter-spacing: -1px; }
+            .hero { padding: 8rem 5% 4rem; }
+            .badge { margin-bottom: 1.5rem; }
             .nav-links { display: none; }
         }
     </style>

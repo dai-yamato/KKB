@@ -267,6 +267,14 @@
         <span class="badge">Beta版</span>
         <h1>家計管理を、<br><span style="color: var(--primary);">思考を加速させる</span>体験に。</h1>
         <p>直感的なUI、リアルタイム分析、そして家族との共有。KKB Premiumはあなたの資産形成を美しくサポートします。</p>
+        
+        <div style="background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); color: var(--accent); padding: 1rem; border-radius: 12px; margin: -1.5rem auto 3rem auto; max-width: 600px; font-size: 0.9rem; text-align: left; display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5;">
+            <span style="font-size: 1.25rem;">⚠️</span>
+            <div>
+                <strong>Beta版に関する重要なお知らせ</strong><br>
+                本サービスは現在ベータ版として運用しております。システムのアップデートやメンテナンスに伴い、<span style="text-decoration: underline;">事前予告なく登録されたデータが初期化（削除）される可能性</span>がございます。大切な家計データは他媒体にも記録しておくなど、ご理解とご了承のうえご利用ください。
+            </div>
+        </div>
         <div class="mockup-container" style="margin-bottom: 2rem;">
             <div class="mockup">
                 <img src="{{ asset('images/lp/dashboard.png') }}" alt="KKB Dashboard Mockup" id="mockup-img">

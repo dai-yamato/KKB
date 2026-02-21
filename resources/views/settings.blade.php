@@ -92,9 +92,12 @@
         window.location.href = '/login';
     }
 
+    const userId = localStorage.getItem('kkb_userId');
+
     const headers = {
         'Content-Type': 'application/json',
-        'X-Household-Id': householdId
+        'X-Household-Id': householdId,
+        'X-User-Id': userId
     };
 
     // ── Init UI from saved settings ───────────────────────────────────────
@@ -316,6 +319,12 @@
     });
 
     document.getElementById('reset-btn').addEventListener('click', async () => {
+        const currentUserRole = localStorage.getItem('kkb_currentUser') || 'editor';
+        if (currentUserRole !== 'admin') {
+            alert('この機能は管理者のみ利用できます。');
+            return;
+        }
+
         if (confirm('全てのデータを削除しますか？この操作は取り消せません。')) {
             try {
                 const response = await fetch('/api/reset', { 

@@ -123,6 +123,13 @@ class SettingController extends Controller
 
     public function reset(Request $request)
     {
+        $userId = $request->header('X-User-Id');
+        $user = User::find($userId);
+        
+        if (!$user || $user->role !== 'admin') {
+            return response()->json(['message' => '全てのデータをリセットする機能は管理者のみ利用できます。'], 403);
+        }
+
         $householdId = $request->header('X-Household-Id');
         Transaction::where('household_id', $householdId)->delete();
         Budget::where('household_id', $householdId)->delete();

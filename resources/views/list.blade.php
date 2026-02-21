@@ -44,5 +44,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/pages/list.js') }}"></script>
+<script src="{{ asset('js/pages/list.js') }}?v={{ filemtime(public_path('js/pages/list.js')) }}"></script>
 @endpush

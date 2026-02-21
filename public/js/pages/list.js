@@ -103,26 +103,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const canDelete = currentUserRole === 'admin' || diffHours <= 24;
 
             html += `
-                <div class="transaction-item" style="border-radius: 0; border-left: none; border-right: none; border-top: none; margin: 0; padding: 1rem;">
-                    <div class="item-info">
-                        <div class="item-icon" style="background: ${isExpense ? 'var(--bg-color)' : 'rgba(16,185,129,0.1)'}">${cat.icon}</div>
-                        <div class="item-details">
-                            <h4>${cat.name} ${t.memo ? `<span style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted);"> - ${t.memo}</span>` : ''}</h4>
-                            <p style="font-size: 0.75rem; color: var(--text-muted);">
-                                ${userName} <span style="font-size: 0.65rem;">(${userRole})</span>
-                            </p>
+                <div class="transaction-item" style="border-radius: 0; border-left: none; border-right: none; border-top: none; margin: 0; padding: 1rem; cursor: pointer; display: flex; flex-direction: column;" onclick="this.querySelector('.memo-accordion').style.display = this.querySelector('.memo-accordion').style.display === 'none' ? 'block' : 'none'">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div class="item-info">
+                            <div class="item-icon" style="background: ${isExpense ? 'var(--bg-color)' : 'rgba(16,185,129,0.1)'}">${cat.icon}</div>
+                            <div class="item-details">
+                                <h4>${cat.name}</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">
+                                    ${userName} <span style="font-size: 0.65rem;">(${userRole})</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div class="item-amount" style="color: ${amountColor}; font-weight: 700;">
+                                ${sign}${KKB.formatMoney(t.amount)}
+                            </div>
+                            ${canDelete ? `
+                            <button class="delete-btn" data-id="${t.id}" style="padding: 0.5rem; margin-left: 0.5rem; background: transparent; border: none; color: var(--accent-color); cursor: pointer; font-size: 1rem;" title="削除" onclick="event.stopPropagation();">
+                                🗑️
+                            </button>
+                            ` : `
+                            <span style="padding: 0.5rem; margin-left: 0.5rem; color: var(--text-muted); font-size: 0.8rem;" title="登録から24時間以上経過したため削除できません">🔒</span>
+                            `}
                         </div>
                     </div>
-                    <div class="item-amount" style="color: ${amountColor};">
-                        ${sign}${KKB.formatMoney(t.amount)}
+                    <div class="memo-accordion" style="display: none; padding: 0.75rem; background: rgba(0,0,0,0.1); border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-main); margin-top: 0.75rem; line-height: 1.5;">
+                        <span style="color: var(--text-muted); display: block; margin-bottom: 0.25rem; font-size: 0.75rem; font-weight: 700;">📝 メモ</span>
+                        ${t.note ? String(t.note).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\n/g, '<br>') : '<span style="color: var(--text-muted);">メモはありません</span>'}
                     </div>
-                    ${canDelete ? `
-                    <button class="delete-btn" data-id="${t.id}" style="padding: 0.5rem; margin-left: 0.5rem; background: transparent; border: none; color: var(--accent-color); cursor: pointer; font-size: 1rem;" title="削除">
-                        🗑️
-                    </button>
-                    ` : `
-                    <span style="padding: 0.5rem; margin-left: 0.5rem; color: var(--text-muted); font-size: 0.8rem;" title="登録から24時間以上経過したため削除できません">🔒</span>
-                    `}
                 </div>
             `;
         });

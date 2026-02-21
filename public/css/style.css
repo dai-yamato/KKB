@@ -429,7 +429,8 @@ select:focus {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         justify-content: flex-start;
-        align-items: flex-end; /* Bottom align for items */
+        align-items: flex-end;
+        /* Bottom align for items */
         gap: 0.5rem;
         padding: 0.5rem 1rem;
         box-sizing: border-box;
@@ -442,8 +443,10 @@ select:focus {
         gap: 4px;
         border-radius: 8px;
         text-align: center;
-        min-width: 75px; /* Give items enough breathing room */
-        flex-shrink: 0; /* Prevent squishing */
+        min-width: 75px;
+        /* Give items enough breathing room */
+        flex-shrink: 0;
+        /* Prevent squishing */
     }
 
     .nav-item span {
@@ -463,19 +466,49 @@ select:focus {
     }
 
     header {
-        flex-direction: row; /* Keep header side-by-side if possible */
+        flex-direction: row;
+        /* Keep header side-by-side if possible */
         justify-content: space-between;
         align-items: center;
         gap: 0.5rem;
         padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
     }
 
-    .header-info h1 {
-        font-size: 1.2rem;
+    .header-title h1 {
+        font-size: 1.4rem;
     }
 
-    .user-profile {
-        width: auto;
+    .header-title p {
+        font-size: 0.8rem;
+    }
+
+    .user-info-text {
+        display: none;
+    }
+
+    .card {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .card-value {
+        font-size: 1.5rem;
+    }
+
+    .form-card {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .input-section {
+        gap: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .transaction-list {
+        max-height: none;
+        /* Let the whole page scroll on mobile */
     }
 
     .summary-grid {

@@ -198,13 +198,21 @@
             margin-bottom: 1rem;
             gap: 6px;
         }
-        
+
         .cat-chip {
             padding: 8px 4px;
         }
-
         .cat-chip span {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
+        }
+        .cat-chip label {
+            font-size: 0.55rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .num-btn {
+            padding: 1rem;
+            font-size: 1.1rem;
         }
 
         .note-input {

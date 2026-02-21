@@ -48,7 +48,7 @@
                 </div>
                 <div class="user-profile" id="current-user-profile" style="position: relative;">
                     <div id="user-profile-trigger" style="display: flex; align-items: center; gap: 1rem; cursor: pointer; padding: 0.5rem; border-radius: 12px; transition: background 0.2s;" onmouseenter="this.style.background='var(--surface-hover)'" onmouseleave="this.style.background='transparent'">
-                        <div style="text-align: right;">
+                        <div class="user-info-text" style="text-align: right;">
                             <div style="font-weight: 600;" id="user-display-name">Guest User</div>
                             <div style="font-size: 0.75rem; color: var(--text-muted);" id="user-role">Resident</div>
                         </div>

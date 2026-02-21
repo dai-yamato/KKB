@@ -99,6 +99,47 @@
     .other-month {
         opacity: 0.3;
     }
+
+    @media (max-width: 768px) {
+        .calendar-card {
+            padding: 1rem;
+            border-radius: 16px;
+        }
+        .calendar-header {
+            margin-bottom: 1rem;
+        }
+        .calendar-header h2 {
+            font-size: 1.25rem;
+        }
+        .calendar-grid {
+            min-width: unset !important;
+            gap: 1px;
+        }
+        .calendar-day-label {
+            padding: 0.5rem 0;
+            font-size: 0.75rem;
+        }
+        .calendar-day {
+            min-height: 80px;
+            padding: 0.25rem;
+        }
+        .day-number {
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        .event-tag {
+            font-size: 0.6rem;
+            padding: 2px;
+            border-radius: 2px;
+            text-align: center;
+        }
+        .calendar-day.today .day-number {
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            margin: 0 auto 0.25rem;
+        }
+    }
 </style>
 @endpush
 
@@ -128,5 +169,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/pages/calendar.js') }}"></script>
+<script src="{{ asset('js/pages/calendar.js') }}?v={{ filemtime(public_path('js/pages/calendar.js')) }}"></script>
 @endpush

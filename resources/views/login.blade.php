@@ -7,8 +7,8 @@
     <title>KKB Premium | ログイン</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <script src="{{ asset('js/kkb-settings.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
+    <script src="{{ asset('js/kkb-settings.js') }}?v={{ filemtime(public_path('js/kkb-settings.js')) }}"></script>
     <style>
         .login-container {
             width: 100%;
@@ -17,6 +17,8 @@
             align-items: center;
             justify-content: center;
             background: var(--bg-color);
+            box-sizing: border-box;
+            padding: 2rem;
         }
 
         .login-card {
@@ -99,6 +101,9 @@
         @media (max-width: 768px) {
             .login-container {
                 padding: 1rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
             }
             .login-card {
                 padding: 1.5rem;

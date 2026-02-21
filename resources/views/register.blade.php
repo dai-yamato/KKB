@@ -7,8 +7,8 @@
     <title>KKB Premium | <span id="page-title-text">新規登録</span></title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <script src="{{ asset('js/kkb-settings.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
+    <script src="{{ asset('js/kkb-settings.js') }}?v={{ filemtime(public_path('js/kkb-settings.js')) }}"></script>
     <style>
         .register-container {
             width: 100%;
@@ -18,6 +18,7 @@
             justify-content: center;
             background: var(--bg-color);
             padding: 2rem;
+            box-sizing: border-box;
         }
 
         .register-card {
@@ -105,6 +106,9 @@
         @media (max-width: 768px) {
             .register-container {
                 padding: 1rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
             }
             .register-card {
                 padding: 1.5rem;

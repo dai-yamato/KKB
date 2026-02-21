@@ -40,6 +40,19 @@ class SystemAdminController extends Controller
         return $admin !== null;
     }
 
+    public function getHouseholds(Request $request)
+    {
+        if (!$this->isAuthenticated($request)) {
+            return response()->json(['message' => 'Unauthorized. System Admin only.'], 403);
+        }
+
+        $households = \App\Models\Household::with('users:id,household_id,name,email,role,created_at')
+            ->withCount(['transactions', 'categories', 'budgets'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return response()->json($households);
+    }
+
     public function getLogs(Request $request)
     {
         if (!$this->isAuthenticated($request)) {

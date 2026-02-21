@@ -258,6 +258,7 @@
         <div class="logo"><span>💎</span> KKB Premium</div>
         <div class="nav-links">
             <a href="#features">機能</a>
+            <a href="#contact">お問い合わせ</a>
             <a href="{{ route('register') }}">新規登録</a>
             <a href="/login" class="btn-cta">ログイン</a>
         </div>
@@ -335,6 +336,29 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="features" id="contact" style="padding-top: 5rem; max-width: 600px; margin: 0 auto; display: block;">
+        <h2 style="font-size: 2rem; text-align: center; margin-bottom: 2rem;">お問い合わせ</h2>
+        <div class="feature-card" style="text-align: left;">
+            <form id="contact-form">
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 700;">お名前</label>
+                    <input type="text" id="contact-name" required style="width: 100%; padding: 1rem; border-radius: 12px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); font-family: inherit;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 700;">メールアドレス</label>
+                    <input type="email" id="contact-email" required style="width: 100%; padding: 1rem; border-radius: 12px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); font-family: inherit;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 700;">お問い合わせ内容</label>
+                    <textarea id="contact-message" required rows="5" style="width: 100%; padding: 1rem; border-radius: 12px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" id="contact-submit" class="btn-cta" style="width: 100%; border: none; cursor: pointer;">送信する</button>
+            </form>
+            <div id="contact-result" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 12px; font-weight: 700; text-align: center;"></div>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2026 KKB Premium. Crafted with high aesthetics.</p>
     </footer>
@@ -355,6 +379,49 @@
             card.style.transform = 'translateY(30px)';
             card.style.transition = 'all 0.6s ease-out';
             observer.observe(card);
+        });
+
+        // Contact Form
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('contact-submit');
+            const resultMsg = document.getElementById('contact-result');
+            
+            btn.disabled = true;
+            btn.textContent = '送信中...';
+            resultMsg.style.display = 'none';
+
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+
+            try {
+                const res = await fetch('/api/contacts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                if (res.ok) {
+                    resultMsg.textContent = 'お問い合わせを受け付けました。';
+                    resultMsg.style.color = '#10b981';
+                    resultMsg.style.background = 'rgba(16, 185, 129, 0.1)';
+                    document.getElementById('contact-form').reset();
+                } else {
+                    const errorData = await res.json();
+                    resultMsg.textContent = errorData.message || 'エラーが発生しました。';
+                    resultMsg.style.color = '#ef4444';
+                    resultMsg.style.background = 'rgba(239, 68, 68, 0.1)';
+                }
+            } catch (err) {
+                resultMsg.textContent = '通信エラーが発生しました。';
+                resultMsg.style.color = '#ef4444';
+                resultMsg.style.background = 'rgba(239, 68, 68, 0.1)';
+            }
+
+            resultMsg.style.display = 'block';
+            btn.disabled = false;
+            btn.textContent = '送信する';
         });
     </script>
 </body>

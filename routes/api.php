@@ -9,6 +9,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\InvitationController;
 use App\Http\Controllers\SystemAdminController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -22,9 +23,13 @@ Route::post('/invitations/generate', [InvitationController::class, 'generate']);
 Route::get('/invitations/{token}', [InvitationController::class, 'show']);
 Route::post('/invitations/{token}/accept', [InvitationController::class, 'accept']);
 
+// Contacts
+Route::post('/contacts', [ContactController::class, 'store']);
+
 // Categories
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::post('/categories', [CategoryController::class, 'store']);
+Route::put('/categories/{category}', [CategoryController::class, 'update']);
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
 // Transactions
@@ -47,6 +52,8 @@ Route::delete('/users/{user}', [SettingController::class, 'deleteUser']);
 
 // System Admin
 Route::post('/system-admin/login', [SystemAdminController::class, 'login']);
+Route::get('/system-admin/households', [SystemAdminController::class, 'getHouseholds']);
 Route::get('/system-admin/logs', [SystemAdminController::class, 'getLogs']);
 Route::get('/system-admin/categories', [SystemAdminController::class, 'getDefaultCategories']);
 Route::put('/system-admin/categories', [SystemAdminController::class, 'updateDefaultCategories']);
+Route::get('/system-admin/contacts', [ContactController::class, 'index']);

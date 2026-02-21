@@ -52,9 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 ${currentUserRole === 'admin' ? `
-                <button class="nav-item delete-btn" data-id="${cat.id}" style="color: var(--accent-color); padding: 0.5rem; background: transparent; border: none; cursor: pointer;">
-                    🗑️ 削除
-                </button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="nav-item edit-btn" data-id="${cat.id}" style="color: var(--primary-color); padding: 0.5rem; background: transparent; border: none; cursor: pointer;">
+                        ✏️ 編集
+                    </button>
+                    <button class="nav-item delete-btn" data-id="${cat.id}" style="color: var(--accent-color); padding: 0.5rem; background: transparent; border: none; cursor: pointer;">
+                        🗑️ 削除
+                    </button>
+                </div>
                 ` : ''}
             `;
             categoryList.appendChild(div);
@@ -64,6 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', (e) => {
                 const id = e.target.closest('.delete-btn').dataset.id;
                 deleteCategory(id);
+            });
+        });
+
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = e.target.closest('.edit-btn').dataset.id;
+                openEditModal(id);
             });
         });
     };
@@ -81,6 +93,63 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('Error deleting category:', error);
             }
+        }
+    };
+
+    const emojisList = ['🎨', '🍎', '🍔', '🛒', '🛍️', '👗', '🚃', '🚗', '✈️', '🎮', '📱', '🎥', '🏠', '💡', '💧', '💰', '💴', '💳', '🏥', '💊', '✂️', '🎁', '🐶', '🐱', '☕', '🍺', '📚', '💪', '👶', '💄'];
+
+    const openEditModal = (id) => {
+        const cat = categories.find(c => String(c.id) === String(id));
+        if (!cat) return;
+
+        document.getElementById('edit-cat-id').value = cat.id;
+        document.getElementById('edit-cat-name').value = cat.name;
+        document.getElementById('edit-cat-icon').value = cat.icon;
+        document.getElementById('edit-selected-icon-display').innerText = cat.icon;
+
+        const container = document.getElementById('edit-emoji-container');
+        container.innerHTML = emojisList.map(e => `
+            <div class="edit-emoji-chip" style="cursor: pointer; font-size: 1.5rem; padding: 0.5rem; border-radius: 8px; transition: background 0.2s; background: ${e === cat.icon ? 'var(--primary-color)' : 'transparent'};" onclick="selectEditEmoji('${e}', this)">${e}</div>
+        `).join('');
+
+        document.getElementById('edit-cat-modal').style.display = 'flex';
+    };
+
+    window.selectEditEmoji = (emoji, el) => {
+        document.getElementById('edit-cat-icon').value = emoji;
+        document.getElementById('edit-selected-icon-display').innerText = emoji;
+        document.querySelectorAll('.edit-emoji-chip').forEach(c => c.style.background = 'transparent');
+        el.style.background = 'var(--primary-color)';
+    };
+
+    window.closeEditModal = () => {
+        document.getElementById('edit-cat-modal').style.display = 'none';
+    };
+
+    window.submitEditCategory = async () => {
+        const id = document.getElementById('edit-cat-id').value;
+        const name = document.getElementById('edit-cat-name').value;
+        const icon = document.getElementById('edit-cat-icon').value;
+
+        if (!name || !icon) return alert('カテゴリ名とアイコンを入力してください');
+
+        try {
+            const response = await fetch(`/api/categories/${id}`, {
+                method: 'PUT',
+                headers: headers,
+                body: JSON.stringify({ name, icon })
+            });
+
+            if (response.ok) {
+                closeEditModal();
+                await fetchCategories();
+            } else {
+                const data = await response.json();
+                alert(data.message || '更新に失敗しました');
+            }
+        } catch (error) {
+            console.error('Error updating category:', error);
+            alert('更新中にエラーが発生しました');
         }
     };
 

@@ -64,8 +64,34 @@
         </div>
     </div>
 </div>
+
+<!-- Edit Category Modal -->
+<div id="edit-cat-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center;">
+    <div style="background: var(--surface-color); padding: 2rem; border-radius: 16px; width: 90%; max-width: 400px; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--primary-color);">カテゴリの編集</h3>
+        <input type="hidden" id="edit-cat-id">
+        
+        <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="edit-cat-name" style="display:block; margin-bottom:0.5rem; font-size:0.875rem; color:var(--text-muted);">カテゴリ名</label>
+            <input type="text" id="edit-cat-name" required style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-family:inherit; box-sizing:border-box;">
+        </div>
+        
+        <div class="form-group">
+            <label style="display:block; margin-bottom:0.5rem; font-size:0.875rem; color:var(--text-muted);">アイコン (絵文字)</label>
+            <input type="hidden" id="edit-cat-icon">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem; text-align: center; background: var(--bg-color); padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color);" id="edit-selected-icon-display"></div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; max-height: 150px; overflow-y: auto; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color);" id="edit-emoji-container">
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" style="flex: 1; padding:0.75rem; border-radius:8px; background:var(--primary-color); color:white; border:none; cursor:pointer; font-weight:700;" onclick="submitEditCategory()">保存する</button>
+            <button type="button" style="flex: 1; padding:0.75rem; border-radius:8px; background:transparent; color:var(--text-muted); border:1px solid var(--border-color); cursor:pointer;" onclick="closeEditModal()">キャンセル</button>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/pages/categories.js') }}"></script>
+<script src="{{ asset('js/pages/categories.js') }}?v={{ filemtime(public_path('js/pages/categories.js')) }}"></script>
 @endpush

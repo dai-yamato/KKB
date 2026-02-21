@@ -45,6 +45,34 @@ class CategoryController extends Controller
         return Category::create($validated);
     }
 
+    public function update(Request $request, Category $category)
+    {
+        $userId = $request->header('X-User-Id');
+        $user = \App\Models\User::find($userId);
+        if (!$user || $user->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized. 管理者のみ編集可能です。'], 403);
+        }
+
+        $householdId = $request->header('X-Household-Id');
+        if ($category->household_id != $householdId) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $validated = $request->validate([
+            'name'  => 'sometimes|string',
+            'icon'  => 'sometimes|string',
+            'group' => 'sometimes|string',
+            'type'  => 'sometimes|in:expense,income',
+        ]);
+
+        if (isset($validated['name'])) {
+            $validated['slug'] = strtolower($validated['name']);
+        }
+
+        $category->update($validated);
+        return response()->json($category);
+    }
+
     public function destroy(Request $request, Category $category)
     {
         $userId = $request->header('X-User-Id');
